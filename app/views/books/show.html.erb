@@ -1,0 +1,56 @@
+<body>
+
+
+
+
+    <main>
+      <p id="notice"></p>
+
+      <div class="container">
+
+
+      <div class="row">
+        <%= render "users/form", user: @user,  book:@book %>
+
+
+
+        <div class="col-md-8 offset-md-1">
+          <h2>Book detail</h2>
+          <table class="table">
+
+            <tbody>
+
+              <tr>
+                <td>
+                  <%= attachment_image_tag @user, :profile_image, fallback: "no_image.jpg", size:'40x40' %></br>
+                  <%= link_to "#{@user.name}", user_path(@user) %>
+                </td>
+
+                <td><%= link_to "#{@booker.title}", book_path(@booker) %></td>
+
+                <td><%= @booker.body %></td>
+
+                <td>
+                  <% if @booker.user == current_user %>
+                    <%= link_to 'Edit', edit_book_path(@booker), class: "btn btn-sm btn-success" %>
+                  <% end %>  
+                </td>
+
+                <td>
+                  <% if @booker.user == current_user %>
+                    <%= link_to 'Destroy', book_path(@booker), method: :delete, "data_confirm" => "本当に消しますか？", class: "btn btn-sm btn-danger" %>
+                  <% end %>
+                </td>
+
+              </tr>
+
+
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+      </div>
+    </main>
+  <%= render 'homes/footer' %>
+</body>
